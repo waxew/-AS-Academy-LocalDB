@@ -18,9 +18,9 @@ android {
         applicationId = "com.asdevelopers.academy.localdb"
         minSdk = 23
         targetSdk = 37
-        // نسخه 0.2.0 مرحله تثبیت Build و بسته آموزشی است.
-        versionCode = 2
-        versionName = "0.2.0"
+        // نسخه 0.3.0: Build پایدار + گسترش محتوای تخصصی و QA.
+        versionCode = 3
+        versionName = "0.3.0"
     }
 
     buildFeatures { compose = true }
