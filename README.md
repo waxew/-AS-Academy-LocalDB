@@ -1,28 +1,26 @@
 # AS Academy LocalDB
 
-آموزش جامع دیتابیس داخلی و آفلاین اندروید از سطح مبانی تا تخصصی.
+اپ آموزشی جامع دیتابیس داخلی و آفلاین اندروید از مبانی تا معماری‌های تخصصی Offline-first.
 
-این ریپو فقط کد و محتوای اختصاصی دوره LocalDB را نگه می‌دارد. Navigation، Design System، Progress، Quiz، Exercise، Search، Bookmark، Settings، Drawer/Profile، Content Engine و قرارداد Course Package از `AS-Academy-Core` استفاده می‌شوند.
+این ریپو فقط کد و محتوای اختصاصی دوره LocalDB را نگه می‌دارد. Navigation، Design System، دیتابیس پیشرفت، Search، Bookmark، Settings، Drawer و Content Engine از `AS-Academy-Core` می‌آیند.
 
 ## مسیر آموزشی
-- SharedPreferences و DataStore
-- SQL و SQLite
-- Room Database
-- Entity، DAO و Repository
-- CRUD
-- Search / Sort / Filter
-- Relationها
-- Migration و Versioning
-- Backup / Restore / Import / Export
-- Encryption و Security
-- Testing / Debugging / Performance
-- Offline-first و Sync
-- پروژه‌های عملی واقعی
+DataStore → SQL → SQLite → Room → CRUD → Relation → Migration → Backup/Restore → Security → Performance/Testing → Offline-first → پروژه‌های واقعی
+
+## وضعیت نسخه 0.2.0
+- ۶ سطح آموزشی
+- ۱۶ فصل
+- ۱۳ درس واقعی پایه
+- ۴ تمرین اصلی
+- ۵ آزمون سطحی
+- ۴ پروژه عملی شامل پروژه نهایی حسابداری آفلاین
+- GitHub Actions برای تولید Debug APK
+- Core به commit سازگار و Build-tested متصل شده است
 
 ## معماری
-- `app`: پوسته سبک اپ Android
+- `app`: پوسته سبک Android
 - `academy-course`: تنظیمات Runtime اختصاصی LocalDB
-- `course/localdb`: درس‌ها، تمرین‌ها، آزمون‌ها و پروژه‌ها
+- `course/localdb`: Course Package و محتوای آموزشی
 - `academy-core`: هسته مشترک AS Academy به صورت Git submodule
 
-نسخه اولیه: `0.1.0`
+Develop by AS Team Group

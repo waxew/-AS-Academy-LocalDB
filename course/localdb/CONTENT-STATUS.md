@@ -1,23 +1,19 @@
 # وضعیت محتوای LocalDB
 
 - معماری Course Package: ✅
-- اتصال به AS-Academy-Core: ✅
-- Levelها و Chapterها: ✅
+- Levelها: ✅ ۶ سطح
+- Chapterها: ✅ ۱۶ فصل
 - Curriculum اصلی: ✅
-- مبانی Local Storage و DataStore: ✅ محتوای پایه
-- SQL و SQLite: ✅ محتوای پایه
-- Room / DAO / Entity / Repository: ✅ محتوای پایه
-- CRUD / Search / Sort / Filter / Index / Paging: ✅ محتوای پایه
-- Relation / Transaction: ✅ محتوای پایه
-- Migration و حفظ داده: ✅ محتوای پایه
-- Backup / Restore / Import / Export: ✅ محتوای پایه
-- Security / Keystore / Injection: ✅ محتوای پایه
-- Testing / WAL / Performance: ✅ محتوای پایه
-- Offline-first / Sync / Conflict: ✅ محتوای پایه
-- Exerciseها: ✅ مجموعه اولیه چندسطحی
-- Quizها: ✅ آزمون‌های مبانی تا تخصصی
-- Projectها: ✅ دفترچه تلفن، مدیریت هزینه، فروشگاه آفلاین و حسابداری نهایی
-- Glossary: ✅ مجموعه اولیه
+- Lessonهای پایه واقعی: ✅ ۱۳ درس
+- Exerciseهای مرحله‌ای: ✅ ۴ تمرین اصلی
+- Quizهای سطحی: ✅ ۵ آزمون
+- Projectهای عملی: ✅ ۴ پروژه
+- Glossary پایه: ✅
+- اتصال به AS-Academy-Core: ✅
+- تثبیت CI با Core سازگار: ✅ در نسخه 0.2.0
 
-## مرحله کیفیت نهایی
-محتوای اصلی همه محورهای دوره اکنون داخل Course Package وجود دارد. توسعه بعدی به معنی افزایش عمق هر محور، افزودن تمرین و سؤال بیشتر، پروژه‌های فرعی و به‌روزرسانی مستمر محتواست؛ نه ایجاد اسکلت ناقص.
+## پوشش آموزشی فعلی
+DataStore، SQL، SQLite، Room، Entity/DAO/Repository، CRUD، Search/Sort/Filter، Index/Paging، Relation/Transaction، Migration، Backup/Restore، Security، Testing/Performance و Offline-first/Sync دارای محتوای آموزشی واقعی هستند.
+
+## مرحله بعد از 0.2.0
+افزایش عمق هر فصل به چند درس، افزودن آزمایشگاه SQL/Room، آزمون‌های بزرگ‌تر، پروژه‌های میانی بیشتر و تست اجرایی APK روی دستگاه/Emulator.
