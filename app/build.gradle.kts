@@ -3,10 +3,11 @@ plugins {
     alias(libs.plugins.compose.compiler)
 }
 
-// فقط بسته آموزشی course داخل assets اپ کپی می‌شود؛ ریشه ریپو دیگر Asset نیست.
+// فقط بسته آموزشی course داخل assets اپ کپی می‌شود؛ ریشه ریپو Asset نیست.
+val generatedCourseAssetsDir = file("$buildDir/generated/courseAssets")
 val syncCourseAssets by tasks.registering(Copy::class) {
-    from(rootProject.layout.projectDirectory.dir("course"))
-    into(layout.buildDirectory.dir("generated/courseAssets/course"))
+    from(rootProject.file("course"))
+    into(file("$generatedCourseAssetsDir/course"))
 }
 
 android {
@@ -30,7 +31,7 @@ android {
     }
 
     // Loader مرکزی در Runtime مسیر course/localdb را از assets می‌خواند.
-    sourceSets.getByName("main").assets.srcDir(layout.buildDirectory.dir("generated/courseAssets"))
+    sourceSets.getByName("main").assets.srcDir(generatedCourseAssetsDir)
 }
 
 // قبل از Merge شدن Assets، محتوای آموزشی اختصاصی دوره آماده می‌شود.
