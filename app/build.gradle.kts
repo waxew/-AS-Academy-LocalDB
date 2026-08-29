@@ -3,6 +3,12 @@ plugins {
     alias(libs.plugins.compose.compiler)
 }
 
+// فقط بسته آموزشی course داخل assets اپ کپی می‌شود؛ ریشه ریپو دیگر Asset نیست.
+val syncCourseAssets by tasks.registering(Copy::class) {
+    from(rootProject.layout.projectDirectory.dir("course"))
+    into(layout.buildDirectory.dir("generated/courseAssets/course"))
+}
+
 android {
     namespace = "com.asdevelopers.academy.localdb"
     compileSdk = 37
@@ -23,9 +29,12 @@ android {
         targetCompatibility = JavaVersion.VERSION_17
     }
 
-    // Loader مرکزی مسیر course/localdb را از assets می‌خواند.
-    sourceSets.getByName("main").assets.srcDir("..")
+    // Loader مرکزی در Runtime مسیر course/localdb را از assets می‌خواند.
+    sourceSets.getByName("main").assets.srcDir(layout.buildDirectory.dir("generated/courseAssets"))
 }
+
+// قبل از Merge شدن Assets، محتوای آموزشی اختصاصی دوره آماده می‌شود.
+tasks.named("preBuild").configure { dependsOn(syncCourseAssets) }
 
 dependencies {
     implementation(project(":core"))
