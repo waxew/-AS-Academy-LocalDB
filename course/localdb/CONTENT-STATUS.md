@@ -1,19 +1,27 @@
 # وضعیت محتوای LocalDB
 
+## نسخه در حال توسعه: 0.3.0
+
 - معماری Course Package: ✅
 - Levelها: ✅ ۶ سطح
 - Chapterها: ✅ ۱۶ فصل
 - Curriculum اصلی: ✅
-- Lessonهای پایه واقعی: ✅ ۱۳ درس
-- Exerciseهای مرحله‌ای: ✅ ۴ تمرین اصلی
-- Quizهای سطحی: ✅ ۵ آزمون
-- Projectهای عملی: ✅ ۴ پروژه
-- Glossary پایه: ✅
+- Lessonها: ✅ پوشش مبانی تا Specialist با درس‌های عمیق Room، Migration، Backup، Security، Performance و Sync
+- Exerciseها: ✅ تمرین‌های کدنویسی و طراحی از مقدماتی تا Specialist
+- Quizها: ✅ آزمون‌های سطحی + آزمون جامع نهایی
+- Projectها: ✅ پروژه‌های میانی + Capstone حسابداری آفلاین
+- Glossary: ✅ واژه‌نامه تخصصی گسترش‌یافته
 - اتصال به AS-Academy-Core: ✅
-- تثبیت CI با Core سازگار: ✅ در نسخه 0.2.0
+- CI: ✅ Build فاز عمیق روی commit 2394371a موفق شده است
 
-## پوشش آموزشی فعلی
-DataStore، SQL، SQLite، Room، Entity/DAO/Repository، CRUD، Search/Sort/Filter، Index/Paging، Relation/Transaction، Migration، Backup/Restore، Security، Testing/Performance و Offline-first/Sync دارای محتوای آموزشی واقعی هستند.
+## پوشش فعلی
+DataStore/Proto DataStore، SQL/JOIN، SQLite، Room، Entity/DAO/Repository، Flow/Coroutines، TypeConverter، Upsert/Batch، CRUD، Search/Sort/Filter، FTS و جست‌وجوی فارسی، Index/Paging، Relation/Composite Key/Junction، Transaction، Migration/AutoMigration، Backup/Restore/SAF، Security/Keystore/SQLCipher، WAL/VACUUM/Query Plan، Testing/Corruption/Recovery و Offline-first/Sync Queue/Conflict Resolution دارای محتوای واقعی هستند.
 
-## مرحله بعد از 0.2.0
-افزایش عمق هر فصل به چند درس، افزودن آزمایشگاه SQL/Room، آزمون‌های بزرگ‌تر، پروژه‌های میانی بیشتر و تست اجرایی APK روی دستگاه/Emulator.
+## کارهای باقی‌مانده برای نسخه نهایی
+- افزایش تعداد مثال و تمرین در بعضی فصل‌های مقدماتی
+- تست اجرایی APK روی Emulator/Device و ثبت نتیجه QA
+- تکمیل UI مشترک Quiz/Exercise/Project/Glossary در AS-Academy-Core در صورت نیاز محصول
+- Release engineering و خروجی نهایی نسخه پایدار
+
+## برآورد
+پوشش سرفصل‌ها تقریباً نهایی است؛ تمرکز باقی‌مانده بیشتر روی polish آموزشی، QA اجرایی و Release است.
