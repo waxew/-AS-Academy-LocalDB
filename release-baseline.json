@@ -1,0 +1,9 @@
+{
+  "applicationId": "com.asdevelopers.academy.localdb",
+  "lastPublishedVersionCode": 2,
+  "lastPublishedVersionName": "0.2.0",
+  "nextVersionCode": 3,
+  "nextVersionName": "0.3.0",
+  "databaseName": "as_academy.db",
+  "databaseSchemaVersion": 1
+}
