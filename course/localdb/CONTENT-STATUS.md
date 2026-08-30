@@ -1,27 +1,27 @@
 # وضعیت محتوای LocalDB
 
-## نسخه در حال توسعه: 0.3.0
+## نسخه 0.3.0
 
-- معماری Course Package: ✅
-- Levelها: ✅ ۶ سطح
-- Chapterها: ✅ ۱۶ فصل
-- Curriculum اصلی: ✅
-- Lessonها: ✅ پوشش مبانی تا Specialist با درس‌های عمیق Room، Migration، Backup، Security، Performance و Sync
-- Exerciseها: ✅ تمرین‌های کدنویسی و طراحی از مقدماتی تا Specialist
-- Quizها: ✅ آزمون‌های سطحی + آزمون جامع نهایی
-- Projectها: ✅ پروژه‌های میانی + Capstone حسابداری آفلاین
-- Glossary: ✅ واژه‌نامه تخصصی گسترش‌یافته
-- اتصال به AS-Academy-Core: ✅
-- CI: ✅ Build فاز عمیق روی commit 2394371a موفق شده است
+- معماری Course Package: کامل
+- 6 سطح آموزشی و 16 فصل اصلی
+- بیش از 30 درس واقعی در سطوح مختلف
+- تمرین‌های مقدماتی، متوسط، پیشرفته و تخصصی
+- آزمون‌های سطحی و آزمون جامع نهایی
+- 7 پروژه عملی از دفترچه تلفن تا حسابداری و Local-first
+- واژه‌نامه تخصصی
+- اتصال به AS-Academy-Core
+- GitHub Actions و Build APK پایدار
 
 ## پوشش فعلی
-DataStore/Proto DataStore، SQL/JOIN، SQLite، Room، Entity/DAO/Repository، Flow/Coroutines، TypeConverter، Upsert/Batch، CRUD، Search/Sort/Filter، FTS و جست‌وجوی فارسی، Index/Paging، Relation/Composite Key/Junction، Transaction، Migration/AutoMigration، Backup/Restore/SAF، Security/Keystore/SQLCipher، WAL/VACUUM/Query Plan، Testing/Corruption/Recovery و Offline-first/Sync Queue/Conflict Resolution دارای محتوای واقعی هستند.
 
-## کارهای باقی‌مانده برای نسخه نهایی
-- افزایش تعداد مثال و تمرین در بعضی فصل‌های مقدماتی
-- تست اجرایی APK روی Emulator/Device و ثبت نتیجه QA
-- تکمیل UI مشترک Quiz/Exercise/Project/Glossary در AS-Academy-Core در صورت نیاز محصول
-- Release engineering و خروجی نهایی نسخه پایدار
+DataStore و Proto DataStore، SQL، SQLiteOpenHelper، Room، DAO/Repository/Flow، CRUD، JOIN/Aggregation، Constraint، Index/Paging/FTS، جست‌وجوی فارسی، Relation، Migration چندنسخه‌ای، Backup/Restore، Security/Keystore/SQLCipher، Testing/Recovery، WAL/VACUUM/Query Plan، Offline-first، Sync Queue، Idempotency و Conflict Resolution پوشش داده شده‌اند.
 
-## برآورد
-پوشش سرفصل‌ها تقریباً نهایی است؛ تمرکز باقی‌مانده بیشتر روی polish آموزشی، QA اجرایی و Release است.
+## کار باقی‌مانده برای Release نهایی
+
+1. QA اجرایی روی Emulator/Device و مسیرهای Back navigation.
+2. همگام‌سازی Core pin با آخرین نسخه پایدار پس از QA مشترک همه Courseها.
+3. افزایش تعداد سؤال و تمرین در فصل‌های کم‌تراکم.
+4. تست نصب نسخه جدید روی نسخه قبلی و حفظ Progress کاربر.
+5. ساخت Release APK امضاشده و verify/checksum.
+
+از نظر سرفصل، دوره اکنون نزدیک به نهایی است؛ تمرکز اصلی از این مرحله QA، UX آموزشی و Release Engineering است.
