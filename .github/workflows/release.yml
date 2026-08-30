@@ -24,6 +24,21 @@ jobs:
         run: python3 scripts/validate_course.py
       - name: Validate app and course versions
         run: python3 scripts/validate_version.py
+      - name: Resolve release version
+        id: version
+        run: |
+          VERSION=$(python3 - <<'PY'
+          import json
+          from pathlib import Path
+          data=json.loads(Path('release-baseline.json').read_text())
+          print(data['nextVersionName'])
+          PY
+          )
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+          if [[ "$GITHUB_REF_TYPE" == "tag" && "$GITHUB_REF_NAME" != "v$VERSION" ]]; then
+            echo "Tag $GITHUB_REF_NAME does not match v$VERSION" >&2
+            exit 1
+          fi
       - name: Require release signing secrets
         env:
           KEYSTORE_BASE64: ${{ secrets.AS_RELEASE_KEYSTORE_BASE64 }}
@@ -47,15 +62,18 @@ jobs:
           AS_RELEASE_KEY_PASSWORD: ${{ secrets.AS_RELEASE_KEY_PASSWORD }}
         run: gradle :app:assembleRelease --stacktrace
       - name: Prepare release files
+        env:
+          VERSION: ${{ steps.version.outputs.version }}
         run: |
           mkdir -p release-output
           APK=$(find app/build/outputs/apk/release -name '*.apk' | head -n 1)
-          cp "$APK" release-output/AS-Academy-LocalDB-v0.3.0.apk
-          sha256sum release-output/AS-Academy-LocalDB-v0.3.0.apk | tee release-output/SHA256.txt
-          "$ANDROID_HOME/build-tools/$(ls "$ANDROID_HOME/build-tools" | sort -V | tail -n 1)/apksigner" verify --verbose --print-certs release-output/AS-Academy-LocalDB-v0.3.0.apk | tee release-output/signature-verification.txt
+          OUT="release-output/AS-Academy-LocalDB-v${VERSION}.apk"
+          cp "$APK" "$OUT"
+          sha256sum "$OUT" | tee release-output/SHA256.txt
+          "$ANDROID_HOME/build-tools/$(ls "$ANDROID_HOME/build-tools" | sort -V | tail -n 1)/apksigner" verify --verbose --print-certs "$OUT" | tee release-output/signature-verification.txt
       - name: Upload signed release package
         uses: actions/upload-artifact@v4
         with:
-          name: AS-Academy-LocalDB-v0.3.0-release
+          name: AS-Academy-LocalDB-v${{ steps.version.outputs.version }}-release
           path: release-output/*
           if-no-files-found: error
