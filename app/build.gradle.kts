@@ -10,6 +10,18 @@ val syncCourseAssets by tasks.registering(Copy::class) {
     into(file("$generatedCourseAssetsDir/course"))
 }
 
+// اطلاعات امضای Release فقط از محیط CI/ماشین توسعه خوانده می‌شود و داخل Git ذخیره نمی‌شود.
+val releaseStoreFile = System.getenv("AS_RELEASE_STORE_FILE")
+val releaseStorePassword = System.getenv("AS_RELEASE_STORE_PASSWORD")
+val releaseKeyAlias = System.getenv("AS_RELEASE_KEY_ALIAS")
+val releaseKeyPassword = System.getenv("AS_RELEASE_KEY_PASSWORD")
+val hasReleaseSigning = listOf(
+    releaseStoreFile,
+    releaseStorePassword,
+    releaseKeyAlias,
+    releaseKeyPassword
+).all { !it.isNullOrBlank() }
+
 android {
     namespace = "com.asdevelopers.academy.localdb"
     compileSdk = 37
@@ -21,6 +33,30 @@ android {
         // نسخه 0.3.0: Build پایدار + گسترش محتوای تخصصی و QA.
         versionCode = 3
         versionName = "0.3.0"
+    }
+
+    signingConfigs {
+        if (hasReleaseSigning) {
+            create("release") {
+                storeFile = file(releaseStoreFile!!)
+                storePassword = releaseStorePassword
+                keyAlias = releaseKeyAlias
+                keyPassword = releaseKeyPassword
+                enableV1Signing = true
+                enableV2Signing = true
+                enableV3Signing = true
+                enableV4Signing = true
+            }
+        }
+    }
+
+    buildTypes {
+        getByName("release") {
+            isMinifyEnabled = false
+            if (hasReleaseSigning) {
+                signingConfig = signingConfigs.getByName("release")
+            }
+        }
     }
 
     buildFeatures { compose = true }
