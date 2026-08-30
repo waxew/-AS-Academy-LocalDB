@@ -26,5 +26,7 @@ include(":academy-course")
 // ماژول‌های مشترک مستقیماً از Core مرکزی استفاده می‌شوند.
 include(":course")
 project(":course").projectDir = file("academy-core/course")
+include(":engine")
+project(":engine").projectDir = file("academy-core/engine")
 include(":core")
 project(":core").projectDir = file("academy-core/core")
