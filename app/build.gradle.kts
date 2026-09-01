@@ -3,11 +3,18 @@ plugins {
     alias(libs.plugins.compose.compiler)
 }
 
-// فقط بسته آموزشی course داخل assets اپ کپی می‌شود؛ ریشه ریپو Asset نیست.
+// MainCourse منبع واحد محتوای آموزشی است. Course Package مرکزی در زمان Build
+// به قرارداد assets فعلی Core یعنی course/localdb نگاشت می‌شود تا Loader و IDهای Progress نشکنند.
+val mainCoursePackageDir = rootProject.file("academy-main-course/courses/localdb/course")
 val generatedCourseAssetsDir = file("$buildDir/generated/courseAssets")
 val syncCourseAssets by tasks.registering(Copy::class) {
-    from(rootProject.file("course"))
-    into(file("$generatedCourseAssetsDir/course"))
+    doFirst {
+        require(mainCoursePackageDir.resolve("manifest.json").isFile) {
+            "LocalDB MainCourse package is missing: ${mainCoursePackageDir.path}. Initialize academy-main-course before building."
+        }
+    }
+    from(mainCoursePackageDir)
+    into(file("$generatedCourseAssetsDir/course/localdb"))
 }
 
 // اطلاعات امضای Release فقط از محیط CI/ماشین توسعه خوانده می‌شود و داخل Git ذخیره نمی‌شود.
@@ -66,11 +73,11 @@ android {
         targetCompatibility = JavaVersion.VERSION_17
     }
 
-    // Loader مرکزی در Runtime مسیر course/localdb را از assets می‌خواند.
+    // Loader مرکزی در Runtime همچنان course/localdb را می‌خواند؛ منبع فایل‌ها MainCourse است.
     sourceSets.getByName("main").assets.srcDir(generatedCourseAssetsDir)
 }
 
-// قبل از Merge شدن Assets، محتوای آموزشی اختصاصی دوره آماده می‌شود.
+// قبل از Merge شدن Assets، Course Package مرکزی آماده می‌شود.
 tasks.named("preBuild").configure { dependsOn(syncCourseAssets) }
 
 dependencies {
