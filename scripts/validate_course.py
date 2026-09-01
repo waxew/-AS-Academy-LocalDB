@@ -3,7 +3,8 @@ import json
 import sys
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[1] / "course" / "localdb"
+REPO_ROOT = Path(__file__).resolve().parents[1]
+ROOT = REPO_ROOT / "academy-main-course" / "courses" / "localdb" / "course"
 
 
 def load(path: Path):
@@ -40,6 +41,10 @@ def unique_ids(items, label, errors):
 
 def main():
     errors = []
+    if not (ROOT / "manifest.json").is_file():
+        print(f"Course validation failed: MainCourse package not found at {ROOT}")
+        return 1
+
     manifest = load(ROOT / "manifest.json")
     levels = load(ROOT / "levels.json")
     chapters = load(ROOT / "chapters.json")
@@ -83,7 +88,7 @@ def main():
         return 1
 
     print(
-        "Course validation passed: "
+        "MainCourse validation passed: "
         f"{len(levels)} levels, {len(chapters)} chapters, {len(lessons)} lessons, "
         f"{len(exercises)} exercises, {len(quizzes)} quizzes, {len(projects)} projects, {len(glossary)} glossary entries."
     )
