@@ -84,6 +84,8 @@ dependencies {
     implementation(project(":core"))
     implementation(project(":course"))
     implementation(project(":academy-course"))
+    // Presentation عمومی اپ از MainUi مصرف می‌شود؛ Core همچنان Runtime/Engine است.
+    implementation(project(":main-ui"))
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.activity.compose)
     implementation(platform(libs.compose.bom))
