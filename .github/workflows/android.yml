@@ -9,9 +9,19 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
+      - name: Checkout LocalDB host and Core
+        uses: actions/checkout@v5
         with:
           submodules: recursive
+
+      # MainCourse is checked out explicitly so the APK is always built from the central source of truth.
+      - name: Checkout MainCourse
+        uses: actions/checkout@v5
+        with:
+          repository: waxew/AS-Academy-MainCourse
+          ref: main
+          path: academy-main-course
+
       - uses: actions/setup-java@v5
         with:
           distribution: temurin
@@ -19,9 +29,9 @@ jobs:
       - uses: gradle/actions/setup-gradle@v4
         with:
           gradle-version: '9.4.1'
-      - name: Validate course package
+      - name: Validate MainCourse package
         run: python3 scripts/validate_course.py
-      - name: Validate app and course versions
+      - name: Validate app and MainCourse versions
         run: python3 scripts/validate_version.py
       - name: Build debug APK
         run: gradle :app:assembleDebug --stacktrace
