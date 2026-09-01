@@ -6,7 +6,11 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 app_gradle = (ROOT / "app" / "build.gradle.kts").read_text(encoding="utf-8")
-manifest = json.loads((ROOT / "course" / "localdb" / "manifest.json").read_text(encoding="utf-8"))
+manifest_path = ROOT / "academy-main-course" / "courses" / "localdb" / "course" / "manifest.json"
+if not manifest_path.is_file():
+    print(f"Version validation failed: MainCourse manifest not found at {manifest_path}")
+    sys.exit(1)
+manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
 baseline = json.loads((ROOT / "release-baseline.json").read_text(encoding="utf-8"))
 
 version_name_match = re.search(r'versionName\s*=\s*"([^"]+)"', app_gradle)
@@ -25,7 +29,7 @@ if version_name_match:
     app_version = version_name_match.group(1)
     course_version = str(manifest.get("version", ""))
     if app_version != course_version:
-        errors.append(f"app versionName {app_version} != course manifest version {course_version}")
+        errors.append(f"app versionName {app_version} != MainCourse manifest version {course_version}")
     if app_version != str(baseline.get("nextVersionName", "")):
         errors.append(f"app versionName {app_version} != release baseline nextVersionName {baseline.get('nextVersionName')}")
 
@@ -50,7 +54,7 @@ if errors:
     sys.exit(1)
 
 print(
-    "Version validation passed: "
+    "Version validation passed against MainCourse: "
     f"applicationId={application_id_match.group(1)}, "
     f"versionName={version_name_match.group(1)}, "
     f"versionCode={version_code_match.group(1)}"
